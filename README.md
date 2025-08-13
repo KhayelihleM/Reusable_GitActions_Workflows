@@ -1,47 +1,42 @@
-Reusable Autotagging Workflows
-Author: Khayelihle Manyathi
-Purpose: Automate semantic version tagging and release notes generation for multiple repositories using GitHub Actions.
+# Reusable Autotagging Workflows
 
-This repository contains two workflows:
+**Author:** Khayelihle Manyathi  
+**Purpose:** Automate semantic version tagging and release notes generation for multiple repositories using GitHub Actions.  
 
-Autotagging Workflow – reusable workflow that automatically tags and generates friendly release notes.
+This repository contains **two workflows**:  
 
-Caller Workflow – example workflow demonstrating how to call the autotagging workflow from another repository.
+1. **Autotagging Workflow** – reusable workflow that automatically tags and generates friendly release notes.  
+2. **Caller Workflow** – example workflow demonstrating how to call the autotagging workflow from another repository.  
 
-🔹 Autotagging Workflow
+---
+
+## 🔹 Autotagging Workflow
+
 A reusable GitHub Actions workflow that:
 
-Reads commit messages using Conventional Commits.
+- Reads commit messages using [Conventional Commits](https://www.conventionalcommits.org/).  
+- Determines the next semantic version (`major.minor.patch`).  
+- Generates **human-friendly release notes** (no raw filenames).  
+- Creates a GitHub release with the new tag.  
 
-Determines the next semantic version (major.minor.patch).
+### **How It Works**
 
-Generates human-friendly release notes (no raw filenames).
+1. **Trigger:** `workflow_call` (can be called from other workflows).  
+2. **Analyze Commits:**  
+   - `feat:` → minor  
+   - `fix:` → patch  
+   - `BREAKING CHANGE:` → major  
+3. **Generate Tag:** Semantic version tag (e.g., `v1.2.0`).  
+4. **Generate Release Notes:** Replace filenames with friendly terms (Application, Blog, CI pipeline, etc.).  
+5. **Publish Release:** Push the tag and release to GitHub automatically.  
 
-Creates a GitHub release with the new tag.
+---
 
-How It Works
-Trigger: workflow_call (can be called from other workflows).
+## 🔹 Caller Workflow Example
 
-Analyze Commits:
+This workflow demonstrates calling the **Autotagging Workflow** from another repository.  
 
-feat: → minor
-
-fix: → patch
-
-BREAKING CHANGE: → major
-
-Generate Tag: Semantic version tag (e.g., v1.2.0).
-
-Generate Release Notes: Replace filenames with friendly terms (Application, Blog, CI pipeline, etc.).
-
-Publish Release: Push the tag and release to GitHub automatically.
-
-🔹 Caller Workflow Example
-This workflow demonstrates calling the Autotagging Workflow from another repository.
-
-yaml
-Copy
-Edit
+```yaml
 name: Call Autotagging
 
 on:
