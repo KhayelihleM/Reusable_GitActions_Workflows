@@ -19,6 +19,7 @@ A reusable GitHub Actions workflow that:
 - Generates **human-friendly release notes** (no raw filenames).  
 - Creates a GitHub release with the new tag.  
 
+
 ### **How It Works**
 
 1. **Trigger:** `workflow_call` (can be called from other workflows).  
@@ -46,32 +47,35 @@ on:
 
 jobs:
   release:
-    uses: khayelihlem/reusable-autotagging-workflows/.github/workflows/autotagging.yml@main
+    uses: KhayelihleM/reusable-autotagging-workflows/.github/workflows/autotagging.yml@main
     with:
       repo-token: ${{ secrets.GITHUB_TOKEN }}
       release-branch: main
-How it Works:
 
-uses: points to the reusable workflow URL and branch.
 
-with: allows passing parameters (like token, branch, etc.).
+## **How it Works:**
 
-Executes the autotagging process in the target repository without duplicating logic.
+  - uses: points to the reusable workflow URL and branch.
 
-✅ Benefits
-Consistency: All repos follow the same tagging rules.
+  - with: allows passing parameters (like token, branch, etc.).
 
-Reusability: Update the workflow once, use everywhere.
+   - Executes the autotagging process in the target repository without       duplicating logic.
 
-Automation: No manual version bumps.
+## ✅ **Benefits**
+**Consistency**: All repos follow the same tagging rules.
+
+**Reusability**: Update the workflow once, use everywhere.
+
+**Automation**: No manual version bumps.
 
 Professional Releases: Clear, readable release notes for all stakeholders.
 
-📦 Setup
-Copy the caller workflow into your repo under .github/workflows/.
+### 📦 **Setup**
+Copy the **caller workflow** into your repo under **.github/workflows/.**
 
-Ensure your repo uses Conventional Commits.
+**NB:** Ensure your repo uses **Conventional Commits.**
 
 Push to main (or configured branch) to trigger autotagging.
 
 Check the Releases page for the new tag and notes.
+Download the commitlint config file and place it in your project dir
