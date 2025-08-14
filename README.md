@@ -52,7 +52,7 @@ jobs:
       repo-token: ${{ secrets.GITHUB_TOKEN }}
       release-branch: main
 
-
+```md
 ## **How it Works:**
 
   - uses: points to the reusable workflow URL and branch.
